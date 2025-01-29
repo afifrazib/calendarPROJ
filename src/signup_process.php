@@ -1,4 +1,5 @@
 <?php
+
 include 'db.php';
 include 'signup.php';
 
@@ -7,9 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    
-    if (!empty($username) && !empty($email) && !empty($password)) 
-    {
+
+    if (!empty($username) && !empty($email) && !empty($password)) {
         //to check existing usernames
         $sql = "SELECT * FROM users WHERE username = ?";
         $stmt = $conn->prepare($sql);
@@ -17,8 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) 
-        {
+        if ($result->num_rows > 0) {
             //username taken
             header("Location: signup.php?status=username_taken");
             exit;
@@ -30,14 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
-       
-        if ($result->num_rows > 0) 
-        {
+
+        if ($result->num_rows > 0) {
             //email taken
             header("Location: signup.php?status=email_taken");
             exit;
         }
-        
+
         $hashpass = password_hash($password, PASSWORD_BCRYPT);
 
 
@@ -48,24 +46,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-        if ($stmt->execute()) 
-        {
+        if ($stmt->execute()) {
             //success
             header("Location: signup.php?status=success");
             exit;
-        } 
-        else 
-        {
+        } else {
             //fail
             header("Location: signup.php?status=failed");
             exit;
         }
-    } 
-    else 
-    {
+    } else {
         //kosong
         header("Location: signup.php?status=empty_fields");
         exit;
     }
 }
-?>

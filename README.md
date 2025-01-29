@@ -1,1 +1,1 @@
-"# calendarPROJ" 
+This is a calendar system where users are required to sign up and log in to their account, select a date and a reminder form will appear to prompt the user to enter the details of the remainder and save it. User can also view and delete the saved reminder.

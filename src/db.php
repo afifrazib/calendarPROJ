@@ -1,9 +1,9 @@
 <?php
 //db creds
-$servername = "localhost";
+$servername = "calendarproj_db";
 $username = "root";
-$pass = "";
-$dbname = "calendar_app";
+$pass = "verysecret";
+$dbname = "calendarproj";
 
 //database connection
 $conn = new mysqli($servername, $username, $pass, $dbname);
